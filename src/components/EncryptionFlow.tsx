@@ -94,6 +94,45 @@ export function EncryptionFlow({ onBack }: EncryptionFlowProps) {
       description: "Your encrypted file is being downloaded.",
     });
   };
+
+  const handleShare = async () => {
+    if (!encryptedFile) return;
+
+    const blob = new Blob([encryptedFile], { type: 'application/octet-stream' });
+    const fileName = `${originalFileName}.sfl`;
+
+    // Check if Web Share API is supported and can share files
+    if (navigator.share && navigator.canShare) {
+      try {
+        const file = new File([blob], fileName, { type: 'application/octet-stream' });
+        
+        if (navigator.canShare({ files: [file] })) {
+          await navigator.share({
+            title: 'Encrypted File',
+            text: `Secure encrypted file: ${originalFileName}`,
+            files: [file]
+          });
+          
+          toast({
+            title: "File shared",
+            description: "Your encrypted file has been shared successfully.",
+          });
+          return;
+        }
+      } catch (error) {
+        if ((error as Error).name !== 'AbortError') {
+          toast({
+            title: "Share failed",
+            description: "Could not share the file. Downloading instead.",
+            variant: "destructive",
+          });
+        }
+      }
+    }
+
+    // Fallback: Download the file
+    handleDownload();
+  };
   
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
@@ -262,6 +301,7 @@ export function EncryptionFlow({ onBack }: EncryptionFlowProps) {
                   </Button>
                   <Button 
                     variant="outline"
+                    onClick={handleShare}
                     className="w-full touch-manipulation"
                     size="lg"
                   >
