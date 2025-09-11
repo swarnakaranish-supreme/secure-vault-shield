@@ -57,19 +57,19 @@ export function FileDropzone({ files, onFilesSelected, maxFiles = 10, accept }: 
     <div className="space-y-4">
       <Card
         className={cn(
-          'border-2 border-dashed p-8 text-center transition-colors',
+          'border-2 border-dashed p-4 sm:p-8 text-center transition-colors touch-manipulation',
           isDragOver ? 'border-primary bg-primary/5' : 'border-muted-foreground/25',
-          'hover:border-primary/50 hover:bg-primary/5'
+          'hover:border-primary/50 hover:bg-primary/5 active:border-primary active:bg-primary/10'
         )}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
       >
-        <div className="flex flex-col items-center gap-4">
-          <Upload className="h-12 w-12 text-muted-foreground" />
+        <div className="flex flex-col items-center gap-3 sm:gap-4">
+          <Upload className="h-8 w-8 sm:h-12 sm:w-12 text-muted-foreground" />
           <div>
-            <h3 className="text-lg font-semibold">{t('choose_files')}</h3>
-            <p className="text-sm text-muted-foreground mt-1">
+            <h3 className="text-base sm:text-lg font-semibold">{t('choose_files')}</h3>
+            <p className="text-xs sm:text-sm text-muted-foreground mt-1">
               {t('drag_drop_files')}
             </p>
           </div>
@@ -82,7 +82,7 @@ export function FileDropzone({ files, onFilesSelected, maxFiles = 10, accept }: 
             className="hidden"
             id="file-input"
           />
-          <Button asChild variant="outline">
+          <Button asChild variant="outline" size="lg" className="touch-manipulation min-h-12">
             <label htmlFor="file-input" className="cursor-pointer">
               Browse Files
             </label>
@@ -97,10 +97,10 @@ export function FileDropzone({ files, onFilesSelected, maxFiles = 10, accept }: 
           </h4>
           {files.map((file, index) => (
             <Card key={index} className="p-3 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <FileIcon className="h-5 w-5 text-primary" />
-                <div>
-                  <p className="text-sm font-medium">{file.name}</p>
+              <div className="flex items-center gap-3 min-w-0 flex-1">
+                <FileIcon className="h-5 w-5 text-primary shrink-0" />
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm font-medium truncate">{file.name}</p>
                   <p className="text-xs text-muted-foreground">{formatFileSize(file.size)}</p>
                 </div>
               </div>
@@ -108,7 +108,7 @@ export function FileDropzone({ files, onFilesSelected, maxFiles = 10, accept }: 
                 variant="ghost"
                 size="sm"
                 onClick={() => removeFile(index)}
-                className="text-destructive hover:text-destructive"
+                className="text-destructive hover:text-destructive shrink-0 touch-manipulation min-h-10 min-w-10"
               >
                 <X className="h-4 w-4" />
               </Button>

@@ -98,20 +98,20 @@ export function EncryptionFlow({ onBack }: EncryptionFlowProps) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
       {/* Header */}
-      <header className="flex items-center p-6 border-b border-border/50">
-        <Button variant="ghost" onClick={onBack} className="mr-4">
-          <ArrowLeft className="h-4 w-4 mr-2" />
-          Back to Dashboard
+      <header className="flex items-center p-4 sm:p-6 border-b border-border/50">
+        <Button variant="ghost" onClick={onBack} className="mr-2 sm:mr-4 touch-manipulation">
+          <ArrowLeft className="h-4 w-4 sm:mr-2" />
+          <span className="hidden sm:inline">Back to Dashboard</span>
         </Button>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           <div className="bg-gradient-to-r from-primary to-accent p-2 rounded-lg">
-            <Lock className="h-5 w-5 text-white" />
+            <Lock className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
           </div>
-          <h1 className="text-lg font-bold">{t('encrypt_file')}</h1>
+          <h1 className="text-base sm:text-lg font-bold">{t('encrypt_file')}</h1>
         </div>
       </header>
       
-      <main className="container mx-auto px-6 py-8">
+      <main className="container mx-auto px-4 sm:px-6 py-4 sm:py-8">
         <div className="max-w-2xl mx-auto">
           {/* Step: File Selection */}
           {step === 'select' && (
@@ -134,6 +134,8 @@ export function EncryptionFlow({ onBack }: EncryptionFlowProps) {
                     variant="security"
                     onClick={() => setStep('password')}
                     disabled={files.length === 0}
+                    size="lg"
+                    className="touch-manipulation min-h-12"
                   >
                     Continue
                   </Button>
@@ -165,10 +167,11 @@ export function EncryptionFlow({ onBack }: EncryptionFlowProps) {
                     <Button 
                       variant="outline"
                       onClick={handleGeneratePassword}
-                      className="shrink-0"
+                      className="shrink-0 touch-manipulation"
+                      size="lg"
                     >
-                      <Key className="h-4 w-4 mr-2" />
-                      Generate
+                      <Key className="h-4 w-4 sm:mr-2" />
+                      <span className="hidden sm:inline">Generate</span>
                     </Button>
                   </div>
                   <PasswordStrengthMeter password={password} />
@@ -183,14 +186,16 @@ export function EncryptionFlow({ onBack }: EncryptionFlowProps) {
                   </ul>
                 </div>
                 
-                <div className="flex justify-between">
-                  <Button variant="outline" onClick={() => setStep('select')}>
+                <div className="flex flex-col sm:flex-row gap-3 sm:justify-between">
+                  <Button variant="outline" onClick={() => setStep('select')} size="lg" className="touch-manipulation">
                     Back
                   </Button>
                   <Button 
                     variant="security"
                     onClick={handleStartEncryption}
                     disabled={!password || password.length < 12}
+                    size="lg"
+                    className="touch-manipulation"
                   >
                     {t('start_encryption')}
                   </Button>
@@ -245,35 +250,37 @@ export function EncryptionFlow({ onBack }: EncryptionFlowProps) {
                   </p>
                 </div>
                 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <Button 
                     variant="success"
                     onClick={handleDownload}
-                    className="w-full"
+                    className="w-full touch-manipulation"
+                    size="lg"
                   >
                     <Download className="h-4 w-4 mr-2" />
                     {t('download')}
                   </Button>
                   <Button 
                     variant="outline"
-                    className="w-full"
+                    className="w-full touch-manipulation"
+                    size="lg"
                   >
                     <Share2 className="h-4 w-4 mr-2" />
                     Share
                   </Button>
                 </div>
                 
-                <div className="flex justify-between">
+                <div className="flex flex-col sm:flex-row gap-3 sm:justify-between">
                   <Button variant="outline" onClick={() => {
                     setStep('select');
                     setFiles([]);
                     setPassword('');
                     setEncryptedFile(null);
                     setProgress(0);
-                  }}>
+                  }} className="touch-manipulation" size="lg">
                     Encrypt Another File
                   </Button>
-                  <Button variant="ghost" onClick={onBack}>
+                  <Button variant="ghost" onClick={onBack} className="touch-manipulation" size="lg">
                     Back to Dashboard
                   </Button>
                 </div>
