@@ -8,6 +8,7 @@ import { Progress } from './ui/progress';
 import { useLanguage } from '../contexts/LanguageContext';
 import { decryptFile, parseEncryptedPackage } from '../lib/crypto';
 import { useToast } from '../hooks/use-toast';
+import { FileDropzone } from './FileDropzone';
 
 interface DecryptionFlowProps {
   onBack: () => void;
@@ -19,26 +20,28 @@ export function DecryptionFlow({ onBack }: DecryptionFlowProps) {
   const { t } = useLanguage();
   const { toast } = useToast();
   const [step, setStep] = useState<Step>('select');
-  const [encryptedFile, setEncryptedFile] = useState<File | null>(null);
+  const [encryptedFiles, setEncryptedFiles] = useState<File[]>([]);
   const [password, setPassword] = useState('');
   const [isDecrypting, setIsDecrypting] = useState(false);
   const [progress, setProgress] = useState(0);
   const [decryptedData, setDecryptedData] = useState<Uint8Array | null>(null);
   const [originalFileName, setOriginalFileName] = useState('');
+
+  const encryptedFile = encryptedFiles[0] || null;
   
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      if (!file.name.endsWith('.sfl')) {
-        toast({
-          title: "Invalid file type",
-          description: "Please select a .sfl encrypted file.",
-          variant: "destructive",
-        });
-        return;
-      }
-      setEncryptedFile(file);
+  const handleFilesSelected = (files: File[]) => {
+    const sflFiles = files.filter(file => file.name.endsWith('.sfl'));
+    
+    if (sflFiles.length === 0 && files.length > 0) {
+      toast({
+        title: "Invalid file type",
+        description: "Please select a .sfl encrypted file.",
+        variant: "destructive",
+      });
+      return;
     }
+    
+    setEncryptedFiles(sflFiles.slice(0, 1)); // Only allow one file
   };
   
   const handleStartDecryption = async () => {
@@ -84,7 +87,7 @@ export function DecryptionFlow({ onBack }: DecryptionFlowProps) {
   const handleDownload = () => {
     if (!decryptedData || !originalFileName) return;
     
-    const blob = new Blob([decryptedData]);
+    const blob = new Blob([new Uint8Array(decryptedData)]);
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
@@ -128,29 +131,12 @@ export function DecryptionFlow({ onBack }: DecryptionFlowProps) {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="space-y-2">
-                  <Label htmlFor="encrypted-file">Encrypted File (.sfl)</Label>
-                  <Input
-                    id="encrypted-file"
-                    type="file"
-                    accept=".sfl"
-                    onChange={handleFileSelect}
-                  />
-                </div>
-                
-                {encryptedFile && (
-                  <div className="p-4 bg-muted/50 rounded-lg">
-                    <div className="flex items-center gap-3">
-                      <FileCheck className="h-5 w-5 text-primary" />
-                      <div>
-                        <p className="font-medium">{encryptedFile.name}</p>
-                        <p className="text-sm text-muted-foreground">
-                          {(encryptedFile.size / 1024 / 1024).toFixed(2)} MB
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                )}
+                <FileDropzone
+                  files={encryptedFiles}
+                  onFilesSelected={handleFilesSelected}
+                  maxFiles={1}
+                  accept=".sfl"
+                />
                 
                 <div className="flex justify-end">
                   <Button 
@@ -274,7 +260,7 @@ export function DecryptionFlow({ onBack }: DecryptionFlowProps) {
                 <div className="flex flex-col sm:flex-row gap-3 sm:justify-between">
                   <Button variant="outline" onClick={() => {
                     setStep('select');
-                    setEncryptedFile(null);
+                    setEncryptedFiles([]);
                     setPassword('');
                     setDecryptedData(null);
                     setProgress(0);

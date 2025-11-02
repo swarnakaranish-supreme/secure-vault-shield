@@ -78,8 +78,8 @@ export function EncryptionFlow({ onBack }: EncryptionFlowProps) {
   
   const handleDownload = () => {
     if (!encryptedFile) return;
-    
-    const blob = new Blob([encryptedFile], { type: 'application/octet-stream' });
+
+    const blob = new Blob([new Uint8Array(encryptedFile)], { type: 'application/octet-stream' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
@@ -98,7 +98,7 @@ export function EncryptionFlow({ onBack }: EncryptionFlowProps) {
   const handleShare = async () => {
     if (!encryptedFile) return;
 
-    const blob = new Blob([encryptedFile], { type: 'application/octet-stream' });
+    const blob = new Blob([new Uint8Array(encryptedFile)], { type: 'application/octet-stream' });
     const fileName = `${originalFileName}.sfl`;
 
     // Check if Web Share API is supported and can share files

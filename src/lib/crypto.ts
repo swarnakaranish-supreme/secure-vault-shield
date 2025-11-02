@@ -49,7 +49,7 @@ export async function deriveKey(
   return crypto.subtle.deriveKey(
     {
       name: 'PBKDF2',
-      salt: salt,
+      salt: new Uint8Array(salt),
       iterations: iterations,
       hash: 'SHA-256'
     },
@@ -84,11 +84,11 @@ export async function encryptFile(
   const encryptedData = await crypto.subtle.encrypt(
     {
       name: 'AES-GCM',
-      iv: iv,
+      iv: new Uint8Array(iv),
       tagLength: 128
     },
     key,
-    fileData
+    new Uint8Array(fileData)
   );
   
   const metadata: EncryptionMetadata = {
@@ -126,11 +126,11 @@ export async function decryptFile(
     const decryptedData = await crypto.subtle.decrypt(
       {
         name: 'AES-GCM',
-        iv: metadata.iv,
+        iv: new Uint8Array(metadata.iv),
         tagLength: 128
       },
       key,
-      encryptedData
+      new Uint8Array(encryptedData)
     );
     
     onProgress?.(100);
