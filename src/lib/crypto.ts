@@ -198,13 +198,16 @@ export function parseEncryptedPackage(packageData: Uint8Array): {
   return { metadata, encryptedData };
 }
 
-// Generate strong password
+// Generate strong password using cryptographically secure random values
 export function generateStrongPassword(length: number = 20): string {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
   let password = '';
   
+  const randomValues = new Uint32Array(length);
+  crypto.getRandomValues(randomValues);
+  
   for (let i = 0; i < length; i++) {
-    password += chars.charAt(Math.floor(Math.random() * chars.length));
+    password += chars.charAt(randomValues[i] % chars.length);
   }
   
   return password;
