@@ -22,7 +22,7 @@ export default function Welcome() {
         
         <div className="flex items-center gap-3">
           <LanguageToggle />
-          <Button variant="ghost" size="sm">
+          <Button variant="ghost" size="sm" onClick={() => navigate('/help')}>
             <HelpCircle className="h-4 w-4 mr-2" />
             {t('help_faq')}
           </Button>
@@ -59,7 +59,7 @@ export default function Welcome() {
                 {t('get_started')}
                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
-              <Button variant="outline" size="lg">
+              <Button variant="outline" size="lg" onClick={() => navigate('/help')}>
                 {t('help_faq')}
               </Button>
             </div>
