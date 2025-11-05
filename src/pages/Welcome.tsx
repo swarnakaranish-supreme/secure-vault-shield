@@ -22,6 +22,10 @@ export default function Welcome() {
         
         <div className="flex items-center gap-3">
           <LanguageToggle />
+          <Button variant="ghost" size="sm" onClick={() => navigate('/help')}>
+            <HelpCircle className="h-4 w-4 mr-2" />
+            Help & FAQ
+          </Button>
         </div>
       </header>
       

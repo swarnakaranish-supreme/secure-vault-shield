@@ -54,6 +54,10 @@ export default function Dashboard() {
         
         <div className="flex items-center gap-3">
           <LanguageToggle />
+          <Button variant="ghost" size="sm" onClick={() => navigate('/help')}>
+            <HelpCircle className="h-4 w-4 mr-2" />
+            Help & FAQ
+          </Button>
           {user ? (
             <div className="flex items-center gap-2">
               <div className="flex items-center gap-2 px-3 py-1 bg-muted rounded-lg">

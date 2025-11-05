@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Shield, Eye, EyeOff } from 'lucide-react';
+import { Shield, Eye, EyeOff, HelpCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -84,8 +84,15 @@ export default function Auth() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5 flex items-center justify-center p-4">
-      <Card className="w-full max-w-md">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5 relative">
+      <div className="absolute top-6 right-6">
+        <Button variant="ghost" size="sm" onClick={() => navigate('/help')}>
+          <HelpCircle className="h-4 w-4 mr-2" />
+          Help & FAQ
+        </Button>
+      </div>
+      <div className="flex items-center justify-center min-h-screen p-4">
+        <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
             <div className="bg-gradient-to-r from-primary to-accent p-3 rounded-lg">
@@ -165,6 +172,7 @@ export default function Auth() {
           </div>
         </CardContent>
       </Card>
+      </div>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowLeft, Unlock, Download, FileCheck, Eye, EyeOff } from 'lucide-react';
+import { ArrowLeft, Unlock, Download, FileCheck, Eye, EyeOff, HelpCircle } from 'lucide-react';
 import { Button } from './ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Input } from './ui/input';
@@ -9,6 +9,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { decryptFile, parseEncryptedPackage } from '../lib/crypto';
 import { useToast } from '../hooks/use-toast';
 import { FileDropzone } from './FileDropzone';
+import { useNavigate } from 'react-router-dom';
 
 interface DecryptionFlowProps {
   onBack: () => void;
@@ -19,6 +20,7 @@ type Step = 'select' | 'password' | 'decrypt' | 'success';
 export function DecryptionFlow({ onBack }: DecryptionFlowProps) {
   const { t } = useLanguage();
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [step, setStep] = useState<Step>('select');
   const [encryptedFiles, setEncryptedFiles] = useState<File[]>([]);
   const [password, setPassword] = useState('');
@@ -107,17 +109,23 @@ export function DecryptionFlow({ onBack }: DecryptionFlowProps) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
       {/* Header */}
-      <header className="flex items-center p-4 sm:p-6 border-b border-border/50">
-        <Button variant="ghost" onClick={onBack} className="mr-2 sm:mr-4 touch-manipulation">
-          <ArrowLeft className="h-4 w-4 sm:mr-2" />
-          <span className="hidden sm:inline">Back to Dashboard</span>
-        </Button>
-        <div className="flex items-center gap-2 sm:gap-3">
-          <div className="bg-gradient-to-r from-accent to-primary p-2 rounded-lg">
-            <Unlock className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
+      <header className="flex justify-between items-center p-4 sm:p-6 border-b border-border/50">
+        <div className="flex items-center">
+          <Button variant="ghost" onClick={onBack} className="mr-2 sm:mr-4 touch-manipulation">
+            <ArrowLeft className="h-4 w-4 sm:mr-2" />
+            <span className="hidden sm:inline">Back to Dashboard</span>
+          </Button>
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="bg-gradient-to-r from-accent to-primary p-2 rounded-lg">
+              <Unlock className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
+            </div>
+            <h1 className="text-base sm:text-lg font-bold">{t('decrypt_file')}</h1>
           </div>
-          <h1 className="text-base sm:text-lg font-bold">{t('decrypt_file')}</h1>
         </div>
+        <Button variant="ghost" size="sm" onClick={() => navigate('/help')}>
+          <HelpCircle className="h-4 w-4 mr-2" />
+          <span className="hidden sm:inline">Help & FAQ</span>
+        </Button>
       </header>
       
       <main className="container mx-auto px-4 sm:px-6 py-4 sm:py-8">
