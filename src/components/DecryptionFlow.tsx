@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowLeft, Unlock, Download, FileCheck } from 'lucide-react';
+import { ArrowLeft, Unlock, Download, FileCheck, Eye, EyeOff } from 'lucide-react';
 import { Button } from './ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Input } from './ui/input';
@@ -22,6 +22,7 @@ export function DecryptionFlow({ onBack }: DecryptionFlowProps) {
   const [step, setStep] = useState<Step>('select');
   const [encryptedFiles, setEncryptedFiles] = useState<File[]>([]);
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [isDecrypting, setIsDecrypting] = useState(false);
   const [progress, setProgress] = useState(0);
   const [decryptedData, setDecryptedData] = useState<Uint8Array | null>(null);
@@ -165,13 +166,22 @@ export function DecryptionFlow({ onBack }: DecryptionFlowProps) {
               <CardContent className="space-y-6">
                 <div className="space-y-2">
                   <Label htmlFor="decrypt-password">{t('password')}</Label>
-                  <Input
-                    id="decrypt-password"
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Enter the encryption password"
-                  />
+                  <div className="relative">
+                    <Input
+                      id="decrypt-password"
+                      type={showPassword ? 'text' : 'password'}
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder="Enter the encryption password"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    </button>
+                  </div>
                 </div>
                 
                 <div className="bg-muted/50 p-4 rounded-lg">

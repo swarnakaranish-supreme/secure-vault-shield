@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Shield, Lock, Unlock, Activity, ArrowLeft } from 'lucide-react';
+import { Shield, Lock, Unlock, Activity, ArrowLeft, LogOut, HelpCircle, User } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { LanguageToggle } from '../components/LanguageToggle';
@@ -7,12 +7,17 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { useNavigate } from 'react-router-dom';
 import { EncryptionFlow } from '../components/EncryptionFlow';
 import { DecryptionFlow } from '../components/DecryptionFlow';
+import { useAuth } from '../hooks/useAuth';
+import { useActivityLog } from '../hooks/useActivityLog';
+import { formatDistanceToNow } from 'date-fns';
 
 type FlowType = 'dashboard' | 'encrypt' | 'decrypt';
 
 export default function Dashboard() {
   const { t } = useLanguage();
   const navigate = useNavigate();
+  const { user, signOut } = useAuth();
+  const { activities, loading: activitiesLoading } = useActivityLog(user?.id);
   const [currentFlow, setCurrentFlow] = useState<FlowType>('dashboard');
   
   if (currentFlow === 'encrypt') {
@@ -22,6 +27,11 @@ export default function Dashboard() {
   if (currentFlow === 'decrypt') {
     return <DecryptionFlow onBack={() => setCurrentFlow('dashboard')} />;
   }
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate('/');
+  };
   
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
@@ -44,10 +54,22 @@ export default function Dashboard() {
         
         <div className="flex items-center gap-3">
           <LanguageToggle />
-          <Button variant="outline" size="sm">
-            <Activity className="h-4 w-4 mr-2" />
-            {t('recent_activity')}
-          </Button>
+          {user ? (
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 px-3 py-1 bg-muted rounded-lg">
+                <User className="h-4 w-4" />
+                <span className="text-sm">{user.email}</span>
+              </div>
+              <Button variant="outline" size="sm" onClick={handleSignOut}>
+                <LogOut className="h-4 w-4 mr-2" />
+                Logout
+              </Button>
+            </div>
+          ) : (
+            <Button variant="outline" size="sm" onClick={() => navigate('/auth')}>
+              Login
+            </Button>
+          )}
         </div>
       </header>
       
@@ -137,22 +159,92 @@ export default function Dashboard() {
             </Card>
           </div>
           
-          {/* Recent Activity */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Activity className="h-5 w-5" />
-                {t('recent_activity')}
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-center py-8 text-muted-foreground">
-                <Activity className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                <p>{t('no_activity')}</p>
-                <p className="text-sm mt-2">Encrypt or decrypt files to see activity here</p>
-              </div>
-            </CardContent>
-          </Card>
+          {/* Help/FAQ or Recent Activity based on login status */}
+          {user ? (
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Activity className="h-5 w-5" />
+                  {t('recent_activity')}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                {activitiesLoading ? (
+                  <div className="text-center py-8 text-muted-foreground">
+                    <Activity className="h-12 w-12 mx-auto mb-4 opacity-50 animate-pulse" />
+                    <p>Loading activity...</p>
+                  </div>
+                ) : activities.length === 0 ? (
+                  <div className="text-center py-8 text-muted-foreground">
+                    <Activity className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                    <p>{t('no_activity')}</p>
+                    <p className="text-sm mt-2">Encrypt or decrypt files to see activity here</p>
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    {activities.map((activity) => (
+                      <div 
+                        key={activity.id}
+                        className="flex items-center justify-between p-3 bg-muted/50 rounded-lg"
+                      >
+                        <div className="flex items-center gap-3">
+                          {activity.action_type === 'encrypt' ? (
+                            <Lock className="h-4 w-4 text-primary" />
+                          ) : (
+                            <Unlock className="h-4 w-4 text-accent" />
+                          )}
+                          <div>
+                            <p className="font-medium text-sm">{activity.file_name}</p>
+                            <p className="text-xs text-muted-foreground">
+                              {activity.action_type === 'encrypt' ? 'Encrypted' : 'Decrypted'} 
+                              {' '}{formatDistanceToNow(new Date(activity.created_at), { addSuffix: true })}
+                            </p>
+                          </div>
+                        </div>
+                        {activity.file_size && (
+                          <span className="text-xs text-muted-foreground">
+                            {(activity.file_size / 1024).toFixed(2)} KB
+                          </span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          ) : (
+            <Card className="bg-gradient-to-r from-accent/5 to-primary/5 border-accent/20">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <HelpCircle className="h-5 w-5" />
+                  Help & FAQ
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <h4 className="font-semibold mb-2">How secure is the encryption?</h4>
+                  <p className="text-sm text-muted-foreground">
+                    We use AES-256-GCM, a military-grade encryption standard. Your files are encrypted locally in your browser, and your password never leaves your device.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-2">What is zero-knowledge security?</h4>
+                  <p className="text-sm text-muted-foreground">
+                    Zero-knowledge means we never have access to your files or passwords. Everything is processed locally on your device using the Web Crypto API.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-2">Can I recover my files if I forget the password?</h4>
+                  <p className="text-sm text-muted-foreground">
+                    No. Due to our zero-knowledge security model, we cannot recover your files if you lose the password. Please store your passwords securely.
+                  </p>
+                </div>
+                <Button variant="outline" className="w-full" onClick={() => navigate('/help')}>
+                  View Full FAQ
+                </Button>
+              </CardContent>
+            </Card>
+          )}
           
           {/* Security Info */}
           <Card className="bg-gradient-to-r from-primary/5 to-accent/5 border-primary/20">

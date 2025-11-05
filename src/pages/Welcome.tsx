@@ -22,10 +22,6 @@ export default function Welcome() {
         
         <div className="flex items-center gap-3">
           <LanguageToggle />
-          <Button variant="ghost" size="sm" onClick={() => navigate('/help')}>
-            <HelpCircle className="h-4 w-4 mr-2" />
-            {t('help_faq')}
-          </Button>
         </div>
       </header>
       
@@ -58,9 +54,6 @@ export default function Welcome() {
               >
                 {t('get_started')}
                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </Button>
-              <Button variant="outline" size="lg" onClick={() => navigate('/help')}>
-                {t('help_faq')}
               </Button>
             </div>
           </div>
@@ -110,22 +103,30 @@ export default function Welcome() {
             </Card>
           </div>
           
-          {/* Guest Mode Banner */}
+          {/* Get Started or Login */}
           <Card className="bg-gradient-to-r from-primary/5 to-accent/5 border-primary/20">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div className="text-left">
-                  <h3 className="font-semibold text-lg">{t('guest_mode')}</h3>
-                  <p className="text-muted-foreground">
-                    {t('guest_mode_desc')}
-                  </p>
+            <CardContent className="p-8">
+              <div className="space-y-4 text-center">
+                <h3 className="font-semibold text-2xl">Ready to secure your files?</h3>
+                <p className="text-muted-foreground max-w-xl mx-auto">
+                  Login to track your encryption history or continue as guest with full encryption features.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                  <Button 
+                    variant="security"
+                    size="lg"
+                    onClick={() => navigate('/auth')}
+                  >
+                    Login / Sign Up
+                  </Button>
+                  <Button 
+                    variant="outline"
+                    size="lg"
+                    onClick={() => navigate('/dashboard')}
+                  >
+                    Continue as Guest
+                  </Button>
                 </div>
-                <Button 
-                  variant="security"
-                  onClick={() => navigate('/dashboard')}
-                >
-                  Start Now
-                </Button>
               </div>
             </CardContent>
           </Card>

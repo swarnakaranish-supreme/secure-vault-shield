@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowLeft, Lock, Key, Download, Share2 } from 'lucide-react';
+import { ArrowLeft, Lock, Key, Download, Share2, Eye, EyeOff } from 'lucide-react';
 import { Button } from './ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Input } from './ui/input';
@@ -23,6 +23,7 @@ export function EncryptionFlow({ onBack }: EncryptionFlowProps) {
   const [step, setStep] = useState<Step>('select');
   const [files, setFiles] = useState<File[]>([]);
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [isEncrypting, setIsEncrypting] = useState(false);
   const [progress, setProgress] = useState(0);
   const [encryptedFile, setEncryptedFile] = useState<Uint8Array | null>(null);
@@ -196,13 +197,22 @@ export function EncryptionFlow({ onBack }: EncryptionFlowProps) {
                 <div className="space-y-2">
                   <Label htmlFor="password">{t('password')}</Label>
                   <div className="flex gap-2">
-                    <Input
-                      id="password"
-                      type="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      placeholder="Enter a strong password"
-                    />
+                    <div className="relative flex-1">
+                      <Input
+                        id="password"
+                        type={showPassword ? 'text' : 'password'}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Enter a strong password"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                      >
+                        {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      </button>
+                    </div>
                     <Button 
                       variant="outline"
                       onClick={handleGeneratePassword}
