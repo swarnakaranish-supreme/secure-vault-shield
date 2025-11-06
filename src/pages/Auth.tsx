@@ -7,10 +7,13 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { LanguageToggle } from '@/components/LanguageToggle';
 
 export default function Auth() {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { t } = useLanguage();
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -49,8 +52,8 @@ export default function Auth() {
         if (error) throw error;
 
         toast({
-          title: "Welcome back!",
-          description: "You've been successfully logged in.",
+          title: t('welcome_back'),
+          description: t('login_success'),
         });
       } else {
         const { error } = await supabase.auth.signUp({
@@ -64,13 +67,13 @@ export default function Auth() {
         if (error) throw error;
 
         toast({
-          title: "Account created!",
-          description: "You can now start using Secure File Locker.",
+          title: t('account_created'),
+          description: t('can_start_using'),
         });
       }
     } catch (error: any) {
       toast({
-        title: isLogin ? "Login failed" : "Signup failed",
+        title: isLogin ? t('login_failed') : t('signup_failed'),
         description: error.message,
         variant: "destructive",
       });
@@ -85,10 +88,11 @@ export default function Auth() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5 relative">
-      <div className="absolute top-6 right-6">
+      <div className="absolute top-6 right-6 flex items-center gap-3">
+        <LanguageToggle />
         <Button variant="ghost" size="sm" onClick={() => navigate('/help')}>
           <HelpCircle className="h-4 w-4 mr-2" />
-          Help & FAQ
+          {t('help_faq')}
         </Button>
       </div>
       <div className="flex items-center justify-center min-h-screen p-4">
@@ -100,18 +104,16 @@ export default function Auth() {
             </div>
           </div>
           <CardTitle className="text-2xl">
-            {isLogin ? 'Login' : 'Create Account'}
+            {isLogin ? t('login') : t('create_account')}
           </CardTitle>
           <CardDescription>
-            {isLogin
-              ? 'Login to track your encryption activity'
-              : 'Sign up to track your encryption activity'}
+            {isLogin ? t('login_desc') : t('signup_desc')}
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">{t('email')}</Label>
               <Input
                 id="email"
                 type="email"
@@ -122,12 +124,12 @@ export default function Auth() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">{t('password')}</Label>
               <div className="relative">
                 <Input
                   id="password"
                   type={showPassword ? 'text' : 'password'}
-                  placeholder={isLogin ? 'Enter your password' : 'At least 6 characters'}
+                  placeholder={isLogin ? t('enter_password') : t('at_least_6_chars')}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
@@ -143,7 +145,7 @@ export default function Auth() {
               </div>
             </div>
             <Button type="submit" className="w-full" variant="security" disabled={loading}>
-              {loading ? 'Please wait...' : (isLogin ? 'Login' : 'Sign Up')}
+              {loading ? t('please_wait') : (isLogin ? t('login') : t('sign_up'))}
             </Button>
           </form>
 
@@ -157,17 +159,17 @@ export default function Auth() {
           </div>
 
           <Button variant="outline" onClick={handleGuestMode} className="w-full">
-            Continue as Guest
+            {t('continue_as_guest')}
           </Button>
 
           <div className="text-center text-sm">
-            {isLogin ? "Don't have an account? " : 'Already have an account? '}
+            {isLogin ? t('dont_have_account') : t('already_have_account')}
             <button
               type="button"
               onClick={() => setIsLogin(!isLogin)}
               className="text-primary hover:underline"
             >
-              {isLogin ? 'Sign up' : 'Login'}
+              {isLogin ? t('sign_up') : t('login')}
             </button>
           </div>
         </CardContent>

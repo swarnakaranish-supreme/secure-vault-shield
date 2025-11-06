@@ -24,7 +24,7 @@ export default function Welcome() {
           <LanguageToggle />
           <Button variant="ghost" size="sm" onClick={() => navigate('/help')}>
             <HelpCircle className="h-4 w-4 mr-2" />
-            Help & FAQ
+            {t('help_faq')}
           </Button>
         </div>
       </header>
@@ -83,11 +83,11 @@ export default function Welcome() {
                 <div className="bg-accent/10 p-3 rounded-lg w-fit">
                   <Key className="h-6 w-6 text-accent" />
                 </div>
-                <CardTitle>AES-256 Encryption</CardTitle>
+                <CardTitle>{t('aes_256_title')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription>
-                  Military-grade encryption with secure key derivation using PBKDF2.
+                  {t('aes_256_desc')}
                 </CardDescription>
               </CardContent>
             </Card>
@@ -97,11 +97,11 @@ export default function Welcome() {
                 <div className="bg-success/10 p-3 rounded-lg w-fit">
                   <Lock className="h-6 w-6 text-success" />
                 </div>
-                <CardTitle>No Data Collection</CardTitle>
+                <CardTitle>{t('no_data_collection')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription>
-                  Your files and passwords stay on your device. We never see your data.
+                  {t('no_data_collection_desc')}
                 </CardDescription>
               </CardContent>
             </Card>
@@ -111,9 +111,9 @@ export default function Welcome() {
           <Card className="bg-gradient-to-r from-primary/5 to-accent/5 border-primary/20">
             <CardContent className="p-8">
               <div className="space-y-4 text-center">
-                <h3 className="font-semibold text-2xl">Ready to secure your files?</h3>
+                <h3 className="font-semibold text-2xl">{t('ready_to_secure')}</h3>
                 <p className="text-muted-foreground max-w-xl mx-auto">
-                  Login to track your encryption history or continue as guest with full encryption features.
+                  {t('login_or_guest')}
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <Button 
@@ -121,14 +121,14 @@ export default function Welcome() {
                     size="lg"
                     onClick={() => navigate('/auth')}
                   >
-                    Login / Sign Up
+                    {t('login_signup')}
                   </Button>
                   <Button 
                     variant="outline"
                     size="lg"
                     onClick={() => navigate('/dashboard')}
                   >
-                    Continue as Guest
+                    {t('continue_as_guest')}
                   </Button>
                 </div>
               </div>
@@ -139,7 +139,7 @@ export default function Welcome() {
       
       {/* Footer */}
       <footer className="text-center py-8 text-sm text-muted-foreground">
-        <p>Built with security and privacy in mind. Your data never leaves your device.</p>
+        <p>{t('built_with_security')}</p>
       </footer>
     </div>
   );

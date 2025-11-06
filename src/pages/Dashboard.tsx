@@ -44,7 +44,7 @@ export default function Dashboard() {
             onClick={() => navigate('/')}
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Back
+            {t('back')}
           </Button>
           <div className="bg-gradient-to-r from-primary to-accent p-2 rounded-lg">
             <Shield className="h-5 w-5 text-white" />
@@ -56,7 +56,7 @@ export default function Dashboard() {
           <LanguageToggle />
           <Button variant="ghost" size="sm" onClick={() => navigate('/help')}>
             <HelpCircle className="h-4 w-4 mr-2" />
-            Help & FAQ
+            {t('help_faq')}
           </Button>
           {user ? (
             <div className="flex items-center gap-2">
@@ -66,12 +66,12 @@ export default function Dashboard() {
               </div>
               <Button variant="outline" size="sm" onClick={handleSignOut}>
                 <LogOut className="h-4 w-4 mr-2" />
-                Logout
+                {t('logout')}
               </Button>
             </div>
           ) : (
             <Button variant="outline" size="sm" onClick={() => navigate('/auth')}>
-              Login
+              {t('login')}
             </Button>
           )}
         </div>
@@ -82,9 +82,9 @@ export default function Dashboard() {
         <div className="max-w-4xl mx-auto space-y-8">
           {/* Welcome Message */}
           <div className="text-center space-y-2">
-            <h2 className="text-2xl font-bold">Welcome to Secure File Locker</h2>
+            <h2 className="text-2xl font-bold">{t('welcome_message')}</h2>
             <p className="text-muted-foreground">
-              Choose an action below to get started with secure file encryption.
+              {t('choose_action')}
             </p>
           </div>
           
@@ -100,7 +100,7 @@ export default function Dashboard() {
                   <div>
                     <CardTitle className="text-xl">{t('encrypt_file')}</CardTitle>
                     <CardDescription>
-                      Protect your files with military-grade encryption
+                      {t('protect_files')}
                     </CardDescription>
                   </div>
                 </div>
@@ -109,19 +109,19 @@ export default function Dashboard() {
                 <div className="space-y-3">
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <div className="w-2 h-2 bg-success rounded-full" />
-                    AES-256-GCM encryption
+                    {t('aes_256_encryption')}
                   </div>
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <div className="w-2 h-2 bg-success rounded-full" />
-                    Zero-knowledge security
+                    {t('zero_knowledge_title')}
                   </div>
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <div className="w-2 h-2 bg-success rounded-full" />
-                    Multiple file support
+                    {t('multiple_file_support')}
                   </div>
                 </div>
                 <Button variant="security" className="w-full mt-4 group-hover:scale-105 transition-transform">
-                  Start Encryption
+                  {t('start_encryption_btn')}
                 </Button>
               </CardContent>
             </Card>
@@ -136,7 +136,7 @@ export default function Dashboard() {
                   <div>
                     <CardTitle className="text-xl">{t('decrypt_file')}</CardTitle>
                     <CardDescription>
-                      Unlock and access your encrypted files
+                      {t('unlock_files')}
                     </CardDescription>
                   </div>
                 </div>
@@ -145,19 +145,19 @@ export default function Dashboard() {
                 <div className="space-y-3">
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <div className="w-2 h-2 bg-success rounded-full" />
-                    Supports .sfl files
+                    {t('supports_sfl')}
                   </div>
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <div className="w-2 h-2 bg-success rounded-full" />
-                    Integrity verification
+                    {t('integrity_verification')}
                   </div>
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <div className="w-2 h-2 bg-success rounded-full" />
-                    Original filename restored
+                    {t('original_filename')}
                   </div>
                 </div>
                 <Button variant="outline" className="w-full mt-4 group-hover:scale-105 transition-transform border-accent text-accent hover:bg-accent hover:text-accent-foreground">
-                  Start Decryption
+                  {t('start_decryption_btn')}
                 </Button>
               </CardContent>
             </Card>
@@ -176,13 +176,13 @@ export default function Dashboard() {
                 {activitiesLoading ? (
                   <div className="text-center py-8 text-muted-foreground">
                     <Activity className="h-12 w-12 mx-auto mb-4 opacity-50 animate-pulse" />
-                    <p>Loading activity...</p>
+                    <p>{t('loading_activity')}</p>
                   </div>
                 ) : activities.length === 0 ? (
                   <div className="text-center py-8 text-muted-foreground">
                     <Activity className="h-12 w-12 mx-auto mb-4 opacity-50" />
                     <p>{t('no_activity')}</p>
-                    <p className="text-sm mt-2">Encrypt or decrypt files to see activity here</p>
+                    <p className="text-sm mt-2">{t('encrypt_decrypt_prompt')}</p>
                   </div>
                 ) : (
                   <div className="space-y-3">
@@ -200,7 +200,7 @@ export default function Dashboard() {
                           <div>
                             <p className="font-medium text-sm">{activity.file_name}</p>
                             <p className="text-xs text-muted-foreground">
-                              {activity.action_type === 'encrypt' ? 'Encrypted' : 'Decrypted'} 
+                              {activity.action_type === 'encrypt' ? t('encrypted') : t('decrypted')} 
                               {' '}{formatDistanceToNow(new Date(activity.created_at), { addSuffix: true })}
                             </p>
                           </div>
@@ -221,30 +221,30 @@ export default function Dashboard() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <HelpCircle className="h-5 w-5" />
-                  Help & FAQ
+                  {t('help_faq')}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <h4 className="font-semibold mb-2">How secure is the encryption?</h4>
+                  <h4 className="font-semibold mb-2">{t('how_secure')}</h4>
                   <p className="text-sm text-muted-foreground">
-                    We use AES-256-GCM, a military-grade encryption standard. Your files are encrypted locally in your browser, and your password never leaves your device.
+                    {t('how_secure_answer')}
                   </p>
                 </div>
                 <div>
-                  <h4 className="font-semibold mb-2">What is zero-knowledge security?</h4>
+                  <h4 className="font-semibold mb-2">{t('what_is_zero_knowledge')}</h4>
                   <p className="text-sm text-muted-foreground">
-                    Zero-knowledge means we never have access to your files or passwords. Everything is processed locally on your device using the Web Crypto API.
+                    {t('what_is_zero_knowledge_answer')}
                   </p>
                 </div>
                 <div>
-                  <h4 className="font-semibold mb-2">Can I recover my files if I forget the password?</h4>
+                  <h4 className="font-semibold mb-2">{t('forgot_password')}</h4>
                   <p className="text-sm text-muted-foreground">
-                    No. Due to our zero-knowledge security model, we cannot recover your files if you lose the password. Please store your passwords securely.
+                    {t('forgot_password_answer')}
                   </p>
                 </div>
                 <Button variant="outline" className="w-full" onClick={() => navigate('/help')}>
-                  View Full FAQ
+                  {t('view_full_faq')}
                 </Button>
               </CardContent>
             </Card>
@@ -258,17 +258,17 @@ export default function Dashboard() {
                 <div>
                   <h3 className="font-semibold text-lg">{t('zero_knowledge_title')}</h3>
                   <p className="text-muted-foreground mt-1">
-                    {t('zero_knowledge_desc')} All encryption happens locally in your browser using the Web Crypto API.
+                    {t('zero_knowledge_desc')} {t('local_encryption')}
                   </p>
                   <div className="grid md:grid-cols-3 gap-4 mt-4">
                     <div className="text-sm">
-                      <strong>Encryption:</strong> AES-256-GCM
+                      <strong>{t('encryption_label')}</strong> AES-256-GCM
                     </div>
                     <div className="text-sm">
-                      <strong>Key Derivation:</strong> PBKDF2 (310k iterations)
+                      <strong>{t('key_derivation_label')}</strong> {t('pbkdf2_iterations')}
                     </div>
                     <div className="text-sm">
-                      <strong>Security:</strong> Zero-knowledge
+                      <strong>{t('security_label')}</strong> {t('zero_knowledge_short')}
                     </div>
                   </div>
                 </div>
