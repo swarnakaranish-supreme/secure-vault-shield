@@ -22,7 +22,7 @@ export default function Index() {
         
         <div className="flex items-center gap-3">
           <LanguageToggle />
-          <Button variant="ghost" size="sm">
+          <Button variant="ghost" size="sm" onClick={() => navigate('/help')}>
             <HelpCircle className="h-4 w-4 mr-2" />
             {t('help_faq')}
           </Button>
@@ -59,7 +59,7 @@ export default function Index() {
                 {t('get_started')}
                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
-              <Button variant="outline" size="lg">
+              <Button variant="outline" size="lg" onClick={() => navigate('/help')}>
                 {t('help_faq')}
               </Button>
             </div>
@@ -86,11 +86,11 @@ export default function Index() {
                 <div className="bg-accent/10 p-3 rounded-lg w-fit">
                   <Key className="h-6 w-6 text-accent" />
                 </div>
-                <CardTitle>AES-256 Encryption</CardTitle>
+                <CardTitle>{t('aes_256_title')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription>
-                  Military-grade encryption with secure key derivation using PBKDF2.
+                  {t('aes_256_desc')}
                 </CardDescription>
               </CardContent>
             </Card>
@@ -100,11 +100,11 @@ export default function Index() {
                 <div className="bg-success/10 p-3 rounded-lg w-fit">
                   <Lock className="h-6 w-6 text-success" />
                 </div>
-                <CardTitle>No Data Collection</CardTitle>
+                <CardTitle>{t('no_data_collection')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription>
-                  Your files and passwords stay on your device. We never see your data.
+                  {t('no_data_collection_desc')}
                 </CardDescription>
               </CardContent>
             </Card>
@@ -124,7 +124,7 @@ export default function Index() {
                   variant="security"
                   onClick={() => navigate('/dashboard')}
                 >
-                  Start Now
+                  {t('get_started')}
                 </Button>
               </div>
             </CardContent>
@@ -134,7 +134,7 @@ export default function Index() {
       
       {/* Footer */}
       <footer className="text-center py-8 text-sm text-muted-foreground">
-        <p>Built with security and privacy in mind. Your data never leaves your device.</p>
+        <p>{t('built_with_security')}</p>
       </footer>
     </div>
   );
