@@ -17,7 +17,7 @@ export default function HelpFAQ() {
         <div className="flex items-center gap-3">
           <Button variant="ghost" size="sm" onClick={() => navigate('/')}>
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Back
+            {t('back')}
           </Button>
           <div className="bg-gradient-to-r from-primary to-accent p-3 rounded-xl">
             <Shield className="h-6 w-6 text-white" />
@@ -39,8 +39,8 @@ export default function HelpFAQ() {
                   <Info className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <CardTitle>Getting Started</CardTitle>
-                  <CardDescription>Basic guidelines to use Secure File Locker</CardDescription>
+                  <CardTitle>{t('getting_started')}</CardTitle>
+                  <CardDescription>{t('getting_started_desc')}</CardDescription>
                 </div>
               </div>
             </CardHeader>
@@ -48,13 +48,13 @@ export default function HelpFAQ() {
               <div className="space-y-2">
                 <h4 className="font-semibold flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-success" />
-                  Encrypting Files
+                  {t('encrypting_files')}
                 </h4>
                 <ol className="list-decimal list-inside space-y-1 text-sm text-muted-foreground ml-6">
-                  <li>Select "Encrypt File" tab on the dashboard</li>
+                  <li>Select "{t('encrypt_file')}" tab on the dashboard</li>
                   <li>Drag & drop your file or click to browse</li>
                   <li>Enter a strong password (min 8 characters recommended)</li>
-                  <li>Click "Start Encryption" and wait for completion</li>
+                  <li>Click "{t('start_encryption')}" and wait for completion</li>
                   <li>Download or share your encrypted file</li>
                 </ol>
               </div>
@@ -62,13 +62,13 @@ export default function HelpFAQ() {
               <div className="space-y-2">
                 <h4 className="font-semibold flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-success" />
-                  Decrypting Files
+                  {t('decrypting_files')}
                 </h4>
                 <ol className="list-decimal list-inside space-y-1 text-sm text-muted-foreground ml-6">
-                  <li>Select "Decrypt File" tab on the dashboard</li>
+                  <li>Select "{t('decrypt_file')}" tab on the dashboard</li>
                   <li>Drag & drop your encrypted file or click to browse</li>
                   <li>Enter the SAME password used during encryption</li>
-                  <li>Click "Start Decryption"</li>
+                  <li>Click "{t('start_decryption')}"</li>
                   <li>Download your original file</li>
                 </ol>
               </div>
@@ -83,8 +83,8 @@ export default function HelpFAQ() {
                   <AlertTriangle className="h-6 w-6 text-destructive" />
                 </div>
                 <div>
-                  <CardTitle>Troubleshooting Tips</CardTitle>
-                  <CardDescription>Common issues and how to fix them</CardDescription>
+                  <CardTitle>{t('troubleshooting')}</CardTitle>
+                  <CardDescription>{t('troubleshooting_desc')}</CardDescription>
                 </div>
               </div>
             </CardHeader>
@@ -172,8 +172,8 @@ export default function HelpFAQ() {
                   <Shield className="h-6 w-6 text-success" />
                 </div>
                 <div>
-                  <CardTitle>Security Best Practices</CardTitle>
-                  <CardDescription>Keep your files safe</CardDescription>
+                  <CardTitle>{t('security_best_practices')}</CardTitle>
+                  <CardDescription>{t('security_best_practices_desc')}</CardDescription>
                 </div>
               </div>
             </CardHeader>
@@ -208,7 +208,7 @@ export default function HelpFAQ() {
               size="lg"
               onClick={() => navigate('/dashboard')}
             >
-              Start Encrypting Files
+              {t('start_encrypting_files')}
             </Button>
           </div>
         </div>

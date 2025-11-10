@@ -145,7 +145,7 @@ export function EncryptionFlow({ onBack }: EncryptionFlowProps) {
         <div className="flex items-center">
           <Button variant="ghost" onClick={onBack} className="mr-2 sm:mr-4 touch-manipulation">
             <ArrowLeft className="h-4 w-4 sm:mr-2" />
-            <span className="hidden sm:inline">Back to Dashboard</span>
+            <span className="hidden sm:inline">{t('back_to_dashboard')}</span>
           </Button>
           <div className="flex items-center gap-2 sm:gap-3">
             <div className="bg-gradient-to-r from-primary to-accent p-2 rounded-lg">
@@ -156,7 +156,7 @@ export function EncryptionFlow({ onBack }: EncryptionFlowProps) {
         </div>
         <Button variant="ghost" size="sm" onClick={() => navigate('/help')}>
           <HelpCircle className="h-4 w-4 mr-2" />
-          <span className="hidden sm:inline">Help & FAQ</span>
+          <span className="hidden sm:inline">{t('help_faq')}</span>
         </Button>
       </header>
       
@@ -166,9 +166,9 @@ export function EncryptionFlow({ onBack }: EncryptionFlowProps) {
           {step === 'select' && (
             <Card>
               <CardHeader>
-                <CardTitle>Select Files to Encrypt</CardTitle>
+                <CardTitle>{t('select_files_encrypt')}</CardTitle>
                 <CardDescription>
-                  Choose the files you want to protect with encryption.
+                  {t('select_files_encrypt_desc')}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
@@ -186,7 +186,7 @@ export function EncryptionFlow({ onBack }: EncryptionFlowProps) {
                     size="lg"
                     className="touch-manipulation min-h-12"
                   >
-                    Continue
+                    {t('continue')}
                   </Button>
                 </div>
               </CardContent>
@@ -197,9 +197,9 @@ export function EncryptionFlow({ onBack }: EncryptionFlowProps) {
           {step === 'password' && (
             <Card>
               <CardHeader>
-                <CardTitle>Set Encryption Password</CardTitle>
+                <CardTitle>{t('set_password')}</CardTitle>
                 <CardDescription>
-                  Create a strong password to protect your file.
+                  {t('set_password_desc')}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
@@ -229,24 +229,24 @@ export function EncryptionFlow({ onBack }: EncryptionFlowProps) {
                       size="lg"
                     >
                       <Key className="h-4 w-4 sm:mr-2" />
-                      <span className="hidden sm:inline">Generate</span>
+                      <span className="hidden sm:inline">{t('generate')}</span>
                     </Button>
                   </div>
                   <PasswordStrengthMeter password={password} />
                 </div>
                 
                 <div className="bg-muted/50 p-4 rounded-lg">
-                  <h4 className="font-medium mb-2">Security Information</h4>
+                  <h4 className="font-medium mb-2">{t('security_info')}</h4>
                   <ul className="text-sm text-muted-foreground space-y-1">
-                    <li>• Password is used to derive encryption key (PBKDF2, 310k iterations)</li>
-                    <li>• Your password never leaves this device</li>
-                    <li>• Make sure to save your password securely</li>
+                    <li>• {t('password_derive')}</li>
+                    <li>• {t('password_never_leaves')}</li>
+                    <li>• {t('save_password')}</li>
                   </ul>
                 </div>
                 
                 <div className="flex flex-col sm:flex-row gap-3 sm:justify-between">
                   <Button variant="outline" onClick={() => setStep('select')} size="lg" className="touch-manipulation">
-                    Back
+                    {t('back')}
                   </Button>
                   <Button 
                     variant="security"
@@ -282,7 +282,7 @@ export function EncryptionFlow({ onBack }: EncryptionFlowProps) {
                 
                 <div className="text-center text-muted-foreground">
                   <Lock className="h-12 w-12 mx-auto mb-4 animate-pulse" />
-                  <p>Encrypting with AES-256-GCM...</p>
+                  <p>{t('encrypting_aes')}</p>
                 </div>
               </CardContent>
             </Card>
@@ -294,7 +294,7 @@ export function EncryptionFlow({ onBack }: EncryptionFlowProps) {
               <CardHeader>
                 <CardTitle className="text-success">{t('success_encrypt')}</CardTitle>
                 <CardDescription>
-                  Your file has been encrypted and is ready for download.
+                  {t('file_encrypted_desc')}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
@@ -302,9 +302,9 @@ export function EncryptionFlow({ onBack }: EncryptionFlowProps) {
                   <div className="bg-success/10 p-6 rounded-full w-fit mx-auto mb-4">
                     <Lock className="h-12 w-12 text-success" />
                   </div>
-                  <h3 className="text-lg font-semibold mb-2">File Encrypted Successfully</h3>
+                  <h3 className="text-lg font-semibold mb-2">{t('file_encrypted_success')}</h3>
                   <p className="text-muted-foreground">
-                    Your file has been encrypted with AES-256-GCM encryption.
+                    {t('file_encrypted_desc')}
                   </p>
                 </div>
                 
@@ -325,7 +325,7 @@ export function EncryptionFlow({ onBack }: EncryptionFlowProps) {
                     size="lg"
                   >
                     <Share2 className="h-4 w-4 mr-2" />
-                    Share
+                    {t('share')}
                   </Button>
                 </div>
                 
@@ -337,10 +337,10 @@ export function EncryptionFlow({ onBack }: EncryptionFlowProps) {
                     setEncryptedFile(null);
                     setProgress(0);
                   }} className="touch-manipulation" size="lg">
-                    Encrypt Another File
+                    {t('encrypt_another')}
                   </Button>
                   <Button variant="ghost" onClick={onBack} className="touch-manipulation" size="lg">
-                    Back to Dashboard
+                    {t('back_to_dashboard')}
                   </Button>
                 </div>
               </CardContent>

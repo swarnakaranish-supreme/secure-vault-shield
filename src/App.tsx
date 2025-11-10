@@ -6,7 +6,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import Welcome from "./pages/Welcome";
 import Dashboard from "./pages/Dashboard";
-import Auth from "./pages/Auth";
 import HelpFAQ from "./pages/HelpFAQ";
 import NotFound from "./pages/NotFound";
 
@@ -21,7 +20,6 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Welcome />} />
-            <Route path="/auth" element={<Auth />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/help" element={<HelpFAQ />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

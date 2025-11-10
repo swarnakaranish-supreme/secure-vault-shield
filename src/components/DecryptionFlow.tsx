@@ -113,7 +113,7 @@ export function DecryptionFlow({ onBack }: DecryptionFlowProps) {
         <div className="flex items-center">
           <Button variant="ghost" onClick={onBack} className="mr-2 sm:mr-4 touch-manipulation">
             <ArrowLeft className="h-4 w-4 sm:mr-2" />
-            <span className="hidden sm:inline">Back to Dashboard</span>
+            <span className="hidden sm:inline">{t('back_to_dashboard')}</span>
           </Button>
           <div className="flex items-center gap-2 sm:gap-3">
             <div className="bg-gradient-to-r from-accent to-primary p-2 rounded-lg">
@@ -124,7 +124,7 @@ export function DecryptionFlow({ onBack }: DecryptionFlowProps) {
         </div>
         <Button variant="ghost" size="sm" onClick={() => navigate('/help')}>
           <HelpCircle className="h-4 w-4 mr-2" />
-          <span className="hidden sm:inline">Help & FAQ</span>
+          <span className="hidden sm:inline">{t('help_faq')}</span>
         </Button>
       </header>
       
@@ -134,9 +134,9 @@ export function DecryptionFlow({ onBack }: DecryptionFlowProps) {
           {step === 'select' && (
             <Card>
               <CardHeader>
-                <CardTitle>Select Encrypted File</CardTitle>
+                <CardTitle>{t('select_encrypted')}</CardTitle>
                 <CardDescription>
-                  Choose the .sfl encrypted file you want to decrypt.
+                  {t('select_encrypted_desc')}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
@@ -155,7 +155,7 @@ export function DecryptionFlow({ onBack }: DecryptionFlowProps) {
                     size="lg"
                     className="touch-manipulation"
                   >
-                    Continue
+                    {t('continue')}
                   </Button>
                 </div>
               </CardContent>
@@ -166,9 +166,9 @@ export function DecryptionFlow({ onBack }: DecryptionFlowProps) {
           {step === 'password' && (
             <Card>
               <CardHeader>
-                <CardTitle>Enter Decryption Password</CardTitle>
+                <CardTitle>{t('enter_decrypt_password')}</CardTitle>
                 <CardDescription>
-                  Enter the password used to encrypt this file.
+                  {t('enter_decrypt_password_desc')}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
@@ -193,17 +193,17 @@ export function DecryptionFlow({ onBack }: DecryptionFlowProps) {
                 </div>
                 
                 <div className="bg-muted/50 p-4 rounded-lg">
-                  <h4 className="font-medium mb-2">Security Information</h4>
+                  <h4 className="font-medium mb-2">{t('security_info')}</h4>
                   <ul className="text-sm text-muted-foreground space-y-1">
                     <li>• Password is verified using cryptographic authentication</li>
                     <li>• Decryption happens locally in your browser</li>
-                    <li>• Wrong password will result in decryption failure</li>
+                    <li>• {t('wrong_password_fail')}</li>
                   </ul>
                 </div>
                 
                 <div className="flex flex-col sm:flex-row gap-3 sm:justify-between">
                   <Button variant="outline" onClick={() => setStep('select')} size="lg" className="touch-manipulation">
-                    Back
+                    {t('back')}
                   </Button>
                   <Button 
                     variant="security"
@@ -239,7 +239,7 @@ export function DecryptionFlow({ onBack }: DecryptionFlowProps) {
                 
                 <div className="text-center text-muted-foreground">
                   <Unlock className="h-12 w-12 mx-auto mb-4 animate-pulse" />
-                  <p>Decrypting with AES-256-GCM...</p>
+                  <p>{t('decrypting_aes')}</p>
                 </div>
               </CardContent>
             </Card>
@@ -251,7 +251,7 @@ export function DecryptionFlow({ onBack }: DecryptionFlowProps) {
               <CardHeader>
                 <CardTitle className="text-success">{t('success_decrypt')}</CardTitle>
                 <CardDescription>
-                  Your file has been decrypted and is ready for download.
+                  {t('file_encrypted_desc')}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
@@ -259,9 +259,9 @@ export function DecryptionFlow({ onBack }: DecryptionFlowProps) {
                   <div className="bg-success/10 p-6 rounded-full w-fit mx-auto mb-4">
                     <FileCheck className="h-12 w-12 text-success" />
                   </div>
-                  <h3 className="text-lg font-semibold mb-2">File Decrypted Successfully</h3>
+                  <h3 className="text-lg font-semibold mb-2">{t('file_decrypted_success')}</h3>
                   <p className="text-muted-foreground">
-                    Original filename: <strong>{originalFileName}</strong>
+                    {t('original_filename')}: <strong>{originalFileName}</strong>
                   </p>
                 </div>
                 
@@ -272,7 +272,7 @@ export function DecryptionFlow({ onBack }: DecryptionFlowProps) {
                   size="lg"
                 >
                   <Download className="h-4 w-4 mr-2" />
-                  Download Original File
+                  {t('download_original')}
                 </Button>
                 
                 <div className="flex flex-col sm:flex-row gap-3 sm:justify-between">
@@ -284,10 +284,10 @@ export function DecryptionFlow({ onBack }: DecryptionFlowProps) {
                     setProgress(0);
                     setOriginalFileName('');
                   }} className="touch-manipulation" size="lg">
-                    Decrypt Another File
+                    {t('decrypt_another')}
                   </Button>
                   <Button variant="ghost" onClick={onBack} className="touch-manipulation" size="lg">
-                    Back to Dashboard
+                    {t('back_to_dashboard')}
                   </Button>
                 </div>
               </CardContent>
