@@ -51,11 +51,11 @@ export default function HelpFAQ() {
                   {t('encrypting_files')}
                 </h4>
                 <ol className="list-decimal list-inside space-y-1 text-sm text-muted-foreground ml-6">
-                  <li>Select "{t('encrypt_file')}" tab on the dashboard</li>
-                  <li>Drag & drop your file or click to browse</li>
-                  <li>Enter a strong password (min 8 characters recommended)</li>
-                  <li>Click "{t('start_encryption')}" and wait for completion</li>
-                  <li>Download or share your encrypted file</li>
+                  <li>{t('faq_encrypt_step1')}</li>
+                  <li>{t('faq_encrypt_step2')}</li>
+                  <li>{t('faq_encrypt_step3')}</li>
+                  <li>{t('faq_encrypt_step4')}</li>
+                  <li>{t('faq_encrypt_step5')}</li>
                 </ol>
               </div>
               
@@ -65,11 +65,11 @@ export default function HelpFAQ() {
                   {t('decrypting_files')}
                 </h4>
                 <ol className="list-decimal list-inside space-y-1 text-sm text-muted-foreground ml-6">
-                  <li>Select "{t('decrypt_file')}" tab on the dashboard</li>
-                  <li>Drag & drop your encrypted file or click to browse</li>
-                  <li>Enter the SAME password used during encryption</li>
-                  <li>Click "{t('start_decryption')}"</li>
-                  <li>Download your original file</li>
+                  <li>{t('faq_decrypt_step1')}</li>
+                  <li>{t('faq_decrypt_step2')}</li>
+                  <li>{t('faq_decrypt_step3')}</li>
+                  <li>{t('faq_decrypt_step4')}</li>
+                  <li>{t('faq_decrypt_step5')}</li>
                 </ol>
               </div>
             </CardContent>
@@ -91,72 +91,72 @@ export default function HelpFAQ() {
             <CardContent>
               <Accordion type="single" collapsible className="w-full">
                 <AccordionItem value="item-1">
-                  <AccordionTrigger>Decryption failed with correct password</AccordionTrigger>
+                  <AccordionTrigger>{t('faq_decrypt_failed')}</AccordionTrigger>
                   <AccordionContent className="space-y-2 text-muted-foreground">
-                    <p><strong>Possible causes:</strong></p>
+                    <p><strong>{t('faq_possible_causes')}</strong></p>
                     <ul className="list-disc list-inside ml-4 space-y-1">
-                      <li>Wrong file selected (ensure it's the encrypted file)</li>
-                      <li>File was corrupted during transfer/download</li>
-                      <li>Password has extra spaces or different case</li>
+                      <li>{t('faq_cause1')}</li>
+                      <li>{t('faq_cause2')}</li>
+                      <li>{t('faq_cause3')}</li>
                     </ul>
-                    <p className="mt-2"><strong>Solutions:</strong></p>
+                    <p className="mt-2"><strong>{t('faq_solutions')}</strong></p>
                     <ul className="list-disc list-inside ml-4 space-y-1">
-                      <li>Re-download the encrypted file and try again</li>
-                      <li>Double-check password (copy-paste if possible)</li>
-                      <li>Ensure file extension is correct (.encrypted)</li>
+                      <li>{t('faq_solution1')}</li>
+                      <li>{t('faq_solution2')}</li>
+                      <li>{t('faq_solution3')}</li>
                     </ul>
                   </AccordionContent>
                 </AccordionItem>
                 
                 <AccordionItem value="item-2">
-                  <AccordionTrigger>File not uploading or processing stuck</AccordionTrigger>
+                  <AccordionTrigger>{t('faq_file_stuck')}</AccordionTrigger>
                   <AccordionContent className="space-y-2 text-muted-foreground">
-                    <p><strong>Try these steps:</strong></p>
+                    <p><strong>{t('faq_try_steps')}</strong></p>
                     <ul className="list-disc list-inside ml-4 space-y-1">
-                      <li>Refresh the page and try again</li>
-                      <li>Clear browser cache and cookies</li>
-                      <li>Try a different browser (Chrome, Firefox, Safari)</li>
-                      <li>Check if file size is reasonable (very large files may take time)</li>
-                      <li>Ensure stable internet connection</li>
+                      <li>{t('faq_step1')}</li>
+                      <li>{t('faq_step2')}</li>
+                      <li>{t('faq_step3')}</li>
+                      <li>{t('faq_step4')}</li>
+                      <li>{t('faq_step5')}</li>
                     </ul>
                   </AccordionContent>
                 </AccordionItem>
                 
                 <AccordionItem value="item-3">
-                  <AccordionTrigger>Share button not working on mobile</AccordionTrigger>
+                  <AccordionTrigger>{t('faq_share_mobile')}</AccordionTrigger>
                   <AccordionContent className="space-y-2 text-muted-foreground">
-                    <p><strong>Solutions:</strong></p>
+                    <p><strong>{t('faq_solutions')}</strong></p>
                     <ul className="list-disc list-inside ml-4 space-y-1">
-                      <li>Update your mobile browser to the latest version</li>
-                      <li>Use the "Download" button instead and share from files</li>
-                      <li>Grant necessary permissions when prompted</li>
-                      <li>Try using Chrome or Safari browser on mobile</li>
+                      <li>{t('faq_share_sol1')}</li>
+                      <li>{t('faq_share_sol2')}</li>
+                      <li>{t('faq_share_sol3')}</li>
+                      <li>{t('faq_share_sol4')}</li>
                     </ul>
                   </AccordionContent>
                 </AccordionItem>
                 
                 <AccordionItem value="item-4">
-                  <AccordionTrigger>Drag & drop not working</AccordionTrigger>
+                  <AccordionTrigger>{t('faq_drag_drop')}</AccordionTrigger>
                   <AccordionContent className="space-y-2 text-muted-foreground">
-                    <p><strong>Alternative method:</strong></p>
+                    <p><strong>{t('faq_alternative')}</strong></p>
                     <ul className="list-disc list-inside ml-4 space-y-1">
-                      <li>Click on the "Choose Files" button instead</li>
-                      <li>Select file from your device's file browser</li>
-                      <li>On mobile, use the browse button (drag & drop may not work)</li>
+                      <li>{t('faq_alt1')}</li>
+                      <li>{t('faq_alt2')}</li>
+                      <li>{t('faq_alt3')}</li>
                     </ul>
                   </AccordionContent>
                 </AccordionItem>
                 
                 <AccordionItem value="item-5">
-                  <AccordionTrigger>Password strength meter showing weak</AccordionTrigger>
+                  <AccordionTrigger>{t('faq_weak_password')}</AccordionTrigger>
                   <AccordionContent className="space-y-2 text-muted-foreground">
-                    <p><strong>Create a stronger password:</strong></p>
+                    <p><strong>{t('faq_stronger')}</strong></p>
                     <ul className="list-disc list-inside ml-4 space-y-1">
-                      <li>Use at least 12 characters</li>
-                      <li>Mix uppercase and lowercase letters</li>
-                      <li>Include numbers and special characters (!@#$%)</li>
-                      <li>Avoid common words or patterns</li>
-                      <li>Don't reuse passwords from other accounts</li>
+                      <li>{t('faq_pass1')}</li>
+                      <li>{t('faq_pass2')}</li>
+                      <li>{t('faq_pass3')}</li>
+                      <li>{t('faq_pass4')}</li>
+                      <li>{t('faq_pass5')}</li>
                     </ul>
                   </AccordionContent>
                 </AccordionItem>
@@ -180,23 +180,23 @@ export default function HelpFAQ() {
             <CardContent className="space-y-3 text-sm text-muted-foreground">
               <div className="flex items-start gap-2">
                 <CheckCircle className="h-4 w-4 text-success mt-0.5 flex-shrink-0" />
-                <p><strong>Never share your password:</strong> Only you should know the password for your encrypted files</p>
+                <p><strong>{t('faq_sec1_title')}</strong> {t('faq_sec1_desc')}</p>
               </div>
               <div className="flex items-start gap-2">
                 <CheckCircle className="h-4 w-4 text-success mt-0.5 flex-shrink-0" />
-                <p><strong>Keep backups:</strong> Store encrypted files in multiple locations</p>
+                <p><strong>{t('faq_sec2_title')}</strong> {t('faq_sec2_desc')}</p>
               </div>
               <div className="flex items-start gap-2">
                 <CheckCircle className="h-4 w-4 text-success mt-0.5 flex-shrink-0" />
-                <p><strong>Remember your password:</strong> We cannot recover forgotten passwords</p>
+                <p><strong>{t('faq_sec3_title')}</strong> {t('faq_sec3_desc')}</p>
               </div>
               <div className="flex items-start gap-2">
                 <CheckCircle className="h-4 w-4 text-success mt-0.5 flex-shrink-0" />
-                <p><strong>Use unique passwords:</strong> Don't reuse passwords from other services</p>
+                <p><strong>{t('faq_sec4_title')}</strong> {t('faq_sec4_desc')}</p>
               </div>
               <div className="flex items-start gap-2">
                 <CheckCircle className="h-4 w-4 text-success mt-0.5 flex-shrink-0" />
-                <p><strong>Verify file integrity:</strong> Ensure encrypted files download completely before deleting originals</p>
+                <p><strong>{t('faq_sec5_title')}</strong> {t('faq_sec5_desc')}</p>
               </div>
             </CardContent>
           </Card>
