@@ -2,10 +2,15 @@ export type Language = 'en' | 'hi';
 
 export const translations = {
   en: {
+    // App
+    app_title: 'Secure File Locker',
+    app_tagline: 'Military-grade encryption for your files. Zero knowledge. Complete privacy.',
+    
     // Welcome page
     welcome_title: 'Secure File Locker',
     welcome_tagline: 'Military-grade encryption for your files. Zero knowledge. Complete privacy.',
     zero_knowledge: 'Zero Knowledge',
+    zero_knowledge_title: 'Zero Knowledge',
     zero_knowledge_desc: 'Client-side encryption ensures only you can access your files.',
     aes_256_title: 'AES-256 Encryption',
     aes_256_desc: 'Military-grade encryption with secure key derivation using PBKDF2.',
@@ -97,11 +102,29 @@ export const translations = {
     original_filename: 'Original filename',
     download_original: 'Download Original File',
     decrypt_another: 'Decrypt Another File',
+    
+    // File Dropzone
+    choose_files: 'Choose Files',
+    drag_drop_files: 'Drag and drop files here',
+    file_selected: 'file selected',
+    files_selected: 'files selected',
+    
+    // Guest Mode
+    guest_mode: 'Guest Mode - Maximum Security',
+    guest_mode_desc: 'All encryption happens locally. No accounts, no tracking, complete privacy.',
+    ready_to_secure: 'Ready to Secure Your Files?',
+    login_or_guest: 'Start protecting your files with military-grade encryption',
+    login_signup: 'Login / Signup',
   },
   hi: {
+    // App
+    app_title: 'सुरक्षित फ़ाइल लॉकर',
+    app_tagline: 'आपकी फ़ाइलों के लिए मिलिट्री-ग्रेड एन्क्रिप्शन। शून्य ज्ञान। पूर्ण गोपनीयता।',
+    
     welcome_title: 'सुरक्षित फ़ाइल लॉकर',
     welcome_tagline: 'आपकी फ़ाइलों के लिए मिलिट्री-ग्रेड एन्क्रिप्शन। शून्य ज्ञान। पूर्ण गोपनीयता।',
     zero_knowledge: 'शून्य ज्ञान',
+    zero_knowledge_title: 'शून्य ज्ञान',
     zero_knowledge_desc: 'क्लाइंट-साइड एन्क्रिप्शन सुनिश्चित करता है कि केवल आप ही अपनी फ़ाइलों तक पहुँच सकते हैं।',
     aes_256_title: 'AES-256 एन्क्रिप्शन',
     aes_256_desc: 'PBKDF2 का उपयोग करके सुरक्षित कुंजी व्युत्पत्ति के साथ मिलिट्री-ग्रेड एन्क्रिप्शन।',
@@ -185,6 +208,19 @@ export const translations = {
     original_filename: 'मूल फ़ाइल का नाम',
     download_original: 'मूल फ़ाइल डाउनलोड करें',
     decrypt_another: 'एक और डिक्रिप्ट करें',
+    
+    // File Dropzone
+    choose_files: 'फ़ाइलें चुनें',
+    drag_drop_files: 'फ़ाइलें यहाँ खींचें और छोड़ें',
+    file_selected: 'फ़ाइल चयनित',
+    files_selected: 'फ़ाइलें चयनित',
+    
+    // Guest Mode
+    guest_mode: 'अतिथि मोड - अधिकतम सुरक्षा',
+    guest_mode_desc: 'सभी एन्क्रिप्शन स्थानीय रूप से होता है। कोई खाता नहीं, कोई ट्रैकिंग नहीं, पूर्ण गोपनीयता।',
+    ready_to_secure: 'अपनी फ़ाइलों को सुरक्षित करने के लिए तैयार हैं?',
+    login_or_guest: 'मिलिट्री-ग्रेड एन्क्रिप्शन से अपनी फ़ाइलों की सुरक्षा शुरू करें',
+    login_signup: 'लॉगिन / साइनअप',
   },
 };
 
