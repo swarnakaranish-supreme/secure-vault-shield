@@ -3,7 +3,7 @@ export type Language = 'en' | 'hi';
 export const translations = {
   en: {
     // App
-    app_title: 'Secure File Locker',
+    app_title: 'SURAKSHITAM Secure File Locker',
     app_tagline: 'Military-grade encryption for your files. Zero knowledge. Complete privacy.',
     
     // Welcome page
@@ -181,7 +181,7 @@ export const translations = {
   },
   hi: {
     // App
-    app_title: 'सुरक्षित फ़ाइल लॉकर',
+    app_title: 'सुरक्षितम सुरक्षित फ़ाइल लॉकर',
     app_tagline: 'आपकी फ़ाइलों के लिए मिलिट्री-ग्रेड एन्क्रिप्शन। शून्य ज्ञान। पूर्ण गोपनीयता।',
     
     welcome_title: 'सुरक्षित फ़ाइल लॉकर',
