@@ -42,7 +42,8 @@ export default function Index() {
             
             <div className="space-y-4">
               <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                {t('app_title')}
+                <div>{t('app_name_line1')}</div>
+                <div>{t('app_name_line2')}</div>
               </h1>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
                 {t('app_tagline')}
